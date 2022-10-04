@@ -19,6 +19,8 @@ label = tk.Label(text="Label!")
 
 # __________________
 
+"""
+
 bar_width, bar_height = 10, 300
 bar_x, bar_y = 60, 30
 bar_coords = [bar_x, bar_y, bar_x + bar_width, bar_y]
@@ -32,6 +34,8 @@ for i in range(1, bar_count + 1):
 canvas.pack()
 
 window.mainloop()
+
+"""
 
 # __________________
 
