@@ -39,7 +39,11 @@ window.mainloop()
 
 # __________________
 
-li = random.sample(range(0, 30), 8)
-print(li)
-al.insertion_sort(li, 0)
-print(li)
+# li = random.sample(range(0, 30), 8)
+# print(li)
+# al.insertion_sort(li, 0)
+# print(li)
+
+li_2 = random.sample(range(0, 30), 8)
+li_2 = al.merge_sort(li_2)
+print(li_2)
