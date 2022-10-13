@@ -29,8 +29,8 @@ def merge_sort(data: list):
     if len(data) == 1:
         return data
 
-    left_half = data[:len(data) // 2 + 1]
-    right_half = data[len(data) // 2 + 1:]
+    left_half = data[:len(data) // 2]
+    right_half = data[len(data) // 2:]
 
     return merge(merge_sort(left_half), merge_sort(right_half))
 
