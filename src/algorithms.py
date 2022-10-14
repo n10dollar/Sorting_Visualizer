@@ -1,5 +1,5 @@
 # ___INSERTION SORT___
-def insertion_sort(data: list, index: int):
+def insertion_sort(data: list, index=0):
     """
     data = [19, 20, 28, 10, 26, 16, 13, 7]
     insertion_sort(data, 0)
@@ -10,14 +10,14 @@ def insertion_sort(data: list, index: int):
         return
 
     # recursive cases
-    if data[index] >= data[index + 1]:
+    if data[index].get_height() >= data[index + 1].get_height():
         swap(data, index, index + 1)
         insertion_sort(data, index - 1)
 
     insertion_sort(data, index + 1)
 
 
-def swap(data: list, index1: int, index2: int):
+def swap(data: list, index1, index2):
     temp = data[index1]
     data[index1] = data[index2]
     data[index2] = temp
