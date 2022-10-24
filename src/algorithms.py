@@ -1,3 +1,6 @@
+import utils as ut
+
+
 # ___INSERTION SORT___
 def insertion_sort(data: list, index=0):
     """
@@ -10,17 +13,11 @@ def insertion_sort(data: list, index=0):
         return
 
     # recursive cases
-    if data[index].get_height() >= data[index + 1].get_height():
-        swap(data, index, index + 1)
+    if data[index].get_height() > data[index + 1].get_height():
+        ut.swap(data, index, index + 1)
         insertion_sort(data, index - 1)
 
     insertion_sort(data, index + 1)
-
-
-def swap(data: list, index1, index2):
-    temp = data[index1]
-    data[index1] = data[index2]
-    data[index2] = temp
 
 
 # ___MERGE SORT___
@@ -32,31 +29,7 @@ def merge_sort(data: list):
     left_half = data[:len(data) // 2]
     right_half = data[len(data) // 2:]
 
-    return merge(merge_sort(left_half), merge_sort(right_half))
+    return ut.merge(merge_sort(left_half), merge_sort(right_half))
 
 
-def merge(sorted_1: list, sorted_2: list):
-    combined = []
-    index_sorted_1 = 0
-    index_sorted_2 = 0
 
-    while True:
-        if index_sorted_1 >= len(sorted_1) or index_sorted_2 >= len(sorted_2):
-            break
-
-        if sorted_1[index_sorted_1] < sorted_2[index_sorted_2]:
-            combined.append(sorted_1[index_sorted_1])
-            index_sorted_1 += 1
-        elif sorted_1[index_sorted_1] > sorted_2[index_sorted_2]:
-            combined.append(sorted_2[index_sorted_2])
-            index_sorted_2 += 1
-        else:
-            combined.append(sorted_1[index_sorted_1])
-            combined.append(sorted_2[index_sorted_2])
-            index_sorted_1 += 1
-            index_sorted_2 += 1
-
-    combined.extend(sorted_1[index_sorted_1:])
-    combined.extend(sorted_2[index_sorted_2:])
-
-    return combined

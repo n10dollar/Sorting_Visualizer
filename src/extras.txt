@@ -1,0 +1,47 @@
+
+# x_base *= 5
+
+
+"""
+bar_width, bar_height = 10, 300
+bar_x, bar_y = 60, 30
+bar_coords = [bar_x, bar_y, bar_x + bar_width, bar_y]
+
+bar_count = 10
+for i in range(1, bar_count + 1):
+    bar_coords = [bar_x + bar_width * (i - 1), bar_y, bar_x + bar_width * i,
+                  bar_y + random.randrange(bar_height // 10, bar_height)]
+    # bar_height * i
+    # [bar_x * i, bar_y, bar_x + bar_width * i, bar_y + bar_height * i]
+    canvas.create_rectangle(bar_coords, fill="red")
+canvas.pack()
+
+window.mainloop()
+
+"""
+
+# __________________
+
+
+# li = random.sample(range(0, 30), 8)
+# print(li)
+# al.insertion_sort(li, 0)
+# print(li)
+
+# li_2 = random.sample(range(0, 30), 8)
+# li_2 = al.merge_sort(li_2)
+# print(li_2)
+
+
+
+
+"""
+def update(bars: list, window, canvas):
+    for index in range(len(bars)):
+        bars[index].set_index(index)
+
+        # bars[index].draw(canvas)
+    # canvas.pack()
+    # window.update
+    # time.sleep(100)
+"""
