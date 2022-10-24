@@ -33,28 +33,34 @@ def swap(data: list, index1, index2):
 
 # __________________
 
-def merge(sorted_1: list, sorted_2: list):
+def merge(sorted_bars_1: list, sorted_bars_2: list):
     combined = []
-    index_sorted_1 = 0
-    index_sorted_2 = 0
+    i_bars_1 = 0
+    i_bars_2 = 0
 
     while True:
-        if index_sorted_1 >= len(sorted_1) or index_sorted_2 >= len(sorted_2):
+        if i_bars_1 >= len(sorted_bars_1) or i_bars_2 >= len(sorted_bars_2):
             break
 
-        if sorted_1[index_sorted_1].get_height() < sorted_2[index_sorted_2].get_height():
-            combined.append(sorted_1[index_sorted_1])
-            index_sorted_1 += 1
-        elif sorted_1[index_sorted_1].get_height() > sorted_2[index_sorted_2].get_height():
-            combined.append(sorted_2[index_sorted_2])
-            index_sorted_2 += 1
+        if sorted_bars_1[i_bars_1].get_height() < sorted_bars_2[i_bars_2].get_height():
+            combined.append(sorted_bars_1[i_bars_1])
+            i_bars_1 += 1
+        elif sorted_bars_1[i_bars_1].get_height() > sorted_bars_2[i_bars_2].get_height():
+            combined.append(sorted_bars_2[i_bars_2])
+            i_bars_2 += 1
         else:
-            combined.append(sorted_1[index_sorted_1])
-            combined.append(sorted_2[index_sorted_2])
-            index_sorted_1 += 1
-            index_sorted_2 += 1
+            combined.append(sorted_bars_1[i_bars_1])
+            combined.append(sorted_bars_2[i_bars_2])
+            i_bars_1 += 1
+            i_bars_2 += 1
 
-    combined.extend(sorted_1[index_sorted_1:])
-    combined.extend(sorted_2[index_sorted_2:])
+    combined.extend(sorted_bars_1[i_bars_1:])
+    combined.extend(sorted_bars_2[i_bars_2:])
 
     return combined
+
+
+# __________________
+
+def divide(data: list):
+    pass

@@ -30,7 +30,7 @@ for i in range(20):
 # update()
 
 print(bars)
-al.insertion_sort(bars)
+al.bubble_sort(bars)
 print(bars)
 
 for i in range(len(bars)):
