@@ -17,8 +17,8 @@ y_base = height * .9
 
 # __________________
 
-# colors = ["red", "green", "blue", "cyan", "magenta", "orange"]
-colors = ["green", "red"]
+colors = ["red", "green", "blue", "cyan", "magenta", "orange"]
+# colors = ["green", "red"]
 bars = []
 
 for i in range(20):
@@ -30,7 +30,8 @@ for i in range(20):
 # update()
 
 print(bars)
-al.bubble_sort(bars)
+bars = al.quick_sort(bars)
+# al.bubble_sort(bars)
 print(bars)
 
 for i in range(len(bars)):

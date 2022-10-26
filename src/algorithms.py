@@ -52,21 +52,29 @@ def bubble_sort(bars: list, sorted_bars=0):
 
 # ___QUICK SORT___
 
-# in-place
+# non-in-place
 def quick_sort(bars: list):
+    if len(bars) == 1 or len(bars) == 0:
+        return bars
+
     pivot = bars[len(bars) // 2]
+
     bars.pop(len(bars) // 2)
     bars.append(pivot)
 
-    smaller_than_pivot = 0
-    larger_than_pivot = 0
+    i_rightward = 0
+    i_leftward = len(bars) - 2
 
-    ind_left = 0
-    ind_right = len(bars) - 1
+    while i_rightward <= i_leftward:
+        if bars[i_rightward].get_height() > bars[i_leftward].get_height():
+            ut.swap(bars, i_rightward, i_leftward)
 
-    while ind_left >= ind_right:
-        if bars[ind_left].get_height() < pivot.get_height():
-            ind_left += 1
-        if bars[ind_right].get_height() >= pivot.get_height():
-            ind_right += 1
+        if bars[i_rightward].get_height() < pivot.get_height():
+            i_rightward += 1
+        if bars[i_leftward].get_height() >= pivot.get_height():
+            i_leftward -= 1
 
+    bars.pop(-1)
+    bars.insert(i_rightward, pivot)
+
+    return quick_sort(bars[:i_rightward]) + quick_sort(bars[i_rightward:])

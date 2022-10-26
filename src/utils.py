@@ -8,7 +8,7 @@ class Bar:
         self.color = color
 
     def __repr__(self):
-        return f"{self.height}"
+        return f"{self.height}, {self.color}"
 
     def draw(self, index, canvas):
         top_left_x = self.x_base + index * self.width
@@ -62,5 +62,4 @@ def merge(sorted_bars_1: list, sorted_bars_2: list):
 
 # __________________
 
-def divide(data: list):
-    pass
+

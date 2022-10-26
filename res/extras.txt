@@ -45,3 +45,10 @@ def update(bars: list, window, canvas):
     # window.update
     # time.sleep(100)
 """
+
+
+    """if len(bars) == 2:
+        if bars[0].get_height() > bars[1].get_height():
+            ut.swap(bars, 0, 1)
+        return bars
+    """
