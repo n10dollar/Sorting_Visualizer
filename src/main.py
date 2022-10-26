@@ -5,7 +5,7 @@ import random as rd
 
 window = tk.Tk()
 
-width, height = 1200, 800
+width, height = 800, 800
 window.geometry(f"{width}x{height}")
 
 window.title("Sorting Visualizer")
@@ -17,8 +17,8 @@ y_base = height * .9
 
 # __________________
 
-colors = ["red", "green", "blue", "cyan", "magenta", "orange"]
-# colors = ["green", "red"]
+# colors = ["red", "green", "blue", "cyan", "magenta", "orange"]
+colors = ["red", "green", "blue"]
 bars = []
 
 for i in range(20):

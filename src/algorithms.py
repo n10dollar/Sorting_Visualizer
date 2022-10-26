@@ -1,7 +1,7 @@
 import utils as ut
 
 
-# ___INSERTION SORT___
+# ___INSERTION_SORT___
 
 # in-place
 def insertion_sort(bars: list, index=0):
@@ -22,7 +22,7 @@ def insertion_sort(bars: list, index=0):
     insertion_sort(bars, index + 1)
 
 
-# ___MERGE SORT___
+# ___MERGE_SORT___
 
 # non-in-place
 def merge_sort(bars: list):
@@ -35,7 +35,7 @@ def merge_sort(bars: list):
     return ut.merge(merge_sort(left_half), merge_sort(right_half))
 
 
-# ___BUBBLE SORT___
+# ___BUBBLE_SORT___
 
 # in-place
 def bubble_sort(bars: list, sorted_bars=0):
@@ -50,16 +50,16 @@ def bubble_sort(bars: list, sorted_bars=0):
         bubble_sort(bars, sorted_bars + 1)
 
 
-# ___QUICK SORT___
+# ___QUICK_SORT___
 
 # non-in-place
 def quick_sort(bars: list):
     if len(bars) == 1 or len(bars) == 0:
         return bars
 
-    pivot = bars[len(bars) // 2]
+    pivot = ut.determine_pivot(bars)
 
-    bars.pop(len(bars) // 2)
+    bars.remove(pivot)
     bars.append(pivot)
 
     i_rightward = 0
@@ -69,12 +69,12 @@ def quick_sort(bars: list):
         if bars[i_rightward].get_height() > bars[i_leftward].get_height():
             ut.swap(bars, i_rightward, i_leftward)
 
-        if bars[i_rightward].get_height() < pivot.get_height():
+        if bars[i_rightward].get_height() <= pivot.get_height():
             i_rightward += 1
         if bars[i_leftward].get_height() >= pivot.get_height():
             i_leftward -= 1
 
-    bars.pop(-1)
+    bars.remove(pivot)
     bars.insert(i_rightward, pivot)
 
     return quick_sort(bars[:i_rightward]) + quick_sort(bars[i_rightward:])

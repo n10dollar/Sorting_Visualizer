@@ -7,6 +7,9 @@ class Bar:
         self.height = height
         self.color = color
 
+    def __str__(self):
+        return f"{self.height}, {self.color}"
+
     def __repr__(self):
         return f"{self.height}, {self.color}"
 
@@ -62,4 +65,17 @@ def merge(sorted_bars_1: list, sorted_bars_2: list):
 
 # __________________
 
+def determine_pivot(bars: list):
+    v_1 = bars[0].get_height()
+    v_2 = bars[-1].get_height()
+    v_3 = bars[len(bars) // 2].get_height()
 
+    avg = (v_1 + v_2 + v_3) // 3
+    curr_ind = 0
+    while avg != bars[curr_ind].get_height():
+        if curr_ind == len(bars) - 1:
+            return bars[len(bars) // 2]
+
+        curr_ind += 1
+
+    return bars[curr_ind]
