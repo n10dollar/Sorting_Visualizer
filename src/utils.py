@@ -8,10 +8,10 @@ class Bar:
         self.color = color
 
     def __str__(self):
-        return f"{self.height}, {self.color}"
+        return f"{self.height}"
 
     def __repr__(self):
-        return f"{self.height}, {self.color}"
+        return self.__str__()
 
     def draw(self, index, canvas):
         top_left_x = self.x_base + index * self.width
@@ -28,10 +28,10 @@ class Bar:
 
 # __________________
 
-def swap(data: list, index1, index2):
-    temp = data[index1]
-    data[index1] = data[index2]
-    data[index2] = temp
+def swap(bars: list, index1, index2):
+    temp = bars[index1]
+    bars[index1] = bars[index2]
+    bars[index2] = temp
 
 
 # __________________
@@ -79,3 +79,36 @@ def determine_pivot(bars: list):
         curr_ind += 1
 
     return bars[curr_ind]
+
+
+# __________________
+
+# assumes heap is already sorted except for the topmost element
+# index * 2 = left child, index * 2 + 1 = right child
+def sort_max_heap(bars_heap: list, index: int):
+    if 2 * index >= len(bars_heap):
+        return
+
+    children_indices = [2 * index, 2 * index + 1]
+    children_values = [bars_heap[2 * index].get_height(), bars_heap[2 * index + 1].get_height()]
+
+    biggest_child_index = children_indices[children_values.index(max(children_values))]
+    # print(biggest_child_index)
+
+    if bars_heap[biggest_child_index].get_height() > bars_heap[index].get_height():
+        swap(bars_heap, index, biggest_child_index)
+        sort_max_heap(bars_heap, biggest_child_index)
+
+
+def create_max_heap(bars: list):
+    for index in range(len(bars) // 2, 0, -1):
+        sort_max_heap(bars, index)
+
+
+
+
+
+
+
+
+

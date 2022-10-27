@@ -30,12 +30,16 @@ for i in range(20):
 # update()
 
 print(bars)
-bars = al.quick_sort(bars)
+# bars = al.quick_sort(bars)
 # al.bubble_sort(bars)
-print(bars)
+# print(bars)
+
+ut.create_max_heap(bars)
 
 for i in range(len(bars)):
     bars[i].draw(i, canvas)
+
+print(bars)
 
 canvas.pack()
 window.mainloop()

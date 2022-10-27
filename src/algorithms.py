@@ -56,6 +56,10 @@ def bubble_sort(bars: list, sorted_bars=0):
 def quick_sort(bars: list):
     if len(bars) == 1 or len(bars) == 0:
         return bars
+    if len(bars) == 2:
+        if bars[0].get_height() > bars[1].get_height():
+            ut.swap(bars, 0, 1)
+        return bars
 
     pivot = ut.determine_pivot(bars)
 
@@ -78,3 +82,10 @@ def quick_sort(bars: list):
     bars.insert(i_rightward, pivot)
 
     return quick_sort(bars[:i_rightward]) + quick_sort(bars[i_rightward:])
+
+
+# ___HEAP_SORT___
+
+# ?-in-place
+def heap_sort(bars: list):
+    pass
