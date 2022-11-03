@@ -52,3 +52,38 @@ def update(bars: list, window, canvas):
             ut.swap(bars, 0, 1)
         return bars
     """
+
+    if 2 * index >= len(bars_heap):
+        return
+
+    children_indices = [2 * index + 1, 2 * index + 2]
+    children_values = [bars_heap[children_indices[0]].get_height(), bars_heap[children_indices[1]].get_height()]
+
+    biggest_child_index = children_indices[children_values.index(max(children_values))]
+    # print(biggest_child_index)
+
+    left_child = right_child = -1
+    if 2 * index + 1 < len(bars_heap):
+        left_child = bars_heap[2 * index + 1]
+    if 2 * index + 2 < len(bars_heap):
+        right_child = bars_heap[2 * index + 2]
+
+    biggest_child = max(left_child, right_child, key=Bar.get_height())
+
+    if biggest_child.get_height() > bars_heap[index].get_height():
+        swap(bars_heap, index, biggest_child_index)
+        sort_max_heap(bars_heap, biggest_child_index)
+
+    child_indices = [2 * index + 1, 2 * index + 2]
+    for i in range(len(child_indices)):
+        if child_indices[i] >= len(bars_heap):
+            child_indices[i] = None
+
+    bigger_child_index = None
+    for ind in child_indices:
+        if ind is not None and bars_heap[ind] > bars_heap[bigger_child_index]:
+            bigger_child_index = ind
+
+    if bigger_child_index is not None:
+        swap(bars_heap, index, bigger_child_index)
+        sort_max_heap(bars_heap, bigger_child_index)

@@ -85,30 +85,41 @@ def determine_pivot(bars: list):
 
 # assumes heap is already sorted except for the topmost element
 # index * 2 = left child, index * 2 + 1 = right child
-def sort_max_heap(bars_heap: list, index: int):
-    if 2 * index >= len(bars_heap):
+def sort_max_heap(bars_heap: list, heap_bottom: int, index=0):
+    # if children are greater than current node,
+    # swap current node with the biggest child
+    # then recur sort_max_heap
+    if not 0 <= index <= heap_bottom:
+        return
+    if left_child(index) > heap_bottom:
+        return
+    if right_child(index) > heap_bottom:
+        if bars_heap[left_child(index)].get_height() > bars_heap[index].get_height():
+            swap(bars_heap, index, left_child(index))
+            return
+
+    # now left and right children both exist
+    if bars_heap[index].get_height() >= bars_heap[left_child(index)].get_height() and \
+            bars_heap[index].get_height() >= bars_heap[right_child(index)].get_height():
         return
 
-    children_indices = [2 * index, 2 * index + 1]
-    children_values = [bars_heap[2 * index].get_height(), bars_heap[2 * index + 1].get_height()]
-
-    biggest_child_index = children_indices[children_values.index(max(children_values))]
-    # print(biggest_child_index)
-
-    if bars_heap[biggest_child_index].get_height() > bars_heap[index].get_height():
-        swap(bars_heap, index, biggest_child_index)
-        sort_max_heap(bars_heap, biggest_child_index)
+    # now current bar is not less than both children
+    if bars_heap[left_child(index)].get_height() > bars_heap[right_child(index)].get_height():
+        swap(bars_heap, index, left_child(index))
+        sort_max_heap(bars_heap, heap_bottom, left_child(index))
+    elif bars_heap[left_child(index)].get_height() < bars_heap[right_child(index)].get_height():
+        swap(bars_heap, index, right_child(index))
+        sort_max_heap(bars_heap, heap_bottom, right_child(index))
 
 
-def create_max_heap(bars: list):
-    for index in range(len(bars) // 2, 0, -1):
-        sort_max_heap(bars, index)
+def create_max_heap(bars: list, heap_bottom: int):
+    for index in range(heap_bottom // 2 - 1, -1, -1):
+        sort_max_heap(bars, heap_bottom, index)
 
 
+def left_child(index: int):
+    return (index + 1) * 2 - 1
 
 
-
-
-
-
-
+def right_child(index: int):
+    return (index + 1) * 2 + 1 - 1

@@ -34,7 +34,7 @@ print(bars)
 # al.bubble_sort(bars)
 # print(bars)
 
-ut.create_max_heap(bars)
+al.heap_sort(bars)
 
 for i in range(len(bars)):
     bars[i].draw(i, canvas)

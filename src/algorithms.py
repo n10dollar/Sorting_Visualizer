@@ -88,4 +88,6 @@ def quick_sort(bars: list):
 
 # ?-in-place
 def heap_sort(bars: list):
-    pass
+    for index in range(len(bars) - 1, 0, -1):
+        ut.create_max_heap(bars, index)
+        ut.swap(bars, 0, index)
