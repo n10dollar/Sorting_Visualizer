@@ -1,3 +1,7 @@
+import random as rd
+import time
+
+
 class Bar:
     width = 15
 
@@ -19,19 +23,48 @@ class Bar:
         bottom_right_x = self.x_base + (index + 1) * self.width
         bottom_right_y = self.y_base
 
-        bar_coords = [top_left_x, top_left_y, bottom_right_x, bottom_right_y]
-        canvas.create_rectangle(bar_coords, fill=self.color)
+        bar_coordinates = [top_left_x, top_left_y, bottom_right_x, bottom_right_y]
+        canvas.create_rectangle(bar_coordinates, fill=self.color)
 
     def get_height(self):
         return self.height
 
 
+def add_bars(bars: list, colors: list, heights: list, x_base, y_base):
+    for i in heights:
+        bars.append(Bar(x_base, y_base, i,
+                        colors[rd.randrange(0, len(colors))]
+                        ))
+
+
+def add_randomized_bars(bars: list, colors: list, count, span, x_base, y_base):
+    for i in range(count):
+        bars.append(Bar(x_base, y_base,
+                        rd.randrange(0, span),
+                        colors[rd.randrange(0, len(colors))]
+                        ))
+
+
+def draw_bars(bars: list, canvas):
+    for i in range(len(bars)):
+        bars[i].draw(i, canvas)
+
+
+# __________________
+
+
+def update_bars(frame, bars: list, canvas):
+    canvas.delete("all")
+    draw_bars(bars, canvas)
+    frame.update_idletasks()
+    frame.update()
+    # time.sleep(.1)
+
+
 # __________________
 
 def swap(bars: list, index1, index2):
-    temp = bars[index1]
-    bars[index1] = bars[index2]
-    bars[index2] = temp
+    bars[index1], bars[index2] = bars[index2], bars[index1]
 
 
 # __________________
@@ -107,7 +140,7 @@ def sort_max_heap(bars_heap: list, heap_bottom: int, index=0):
     if bars_heap[left_child(index)].get_height() > bars_heap[right_child(index)].get_height():
         swap(bars_heap, index, left_child(index))
         sort_max_heap(bars_heap, heap_bottom, left_child(index))
-    elif bars_heap[left_child(index)].get_height() < bars_heap[right_child(index)].get_height():
+    else:
         swap(bars_heap, index, right_child(index))
         sort_max_heap(bars_heap, heap_bottom, right_child(index))
 

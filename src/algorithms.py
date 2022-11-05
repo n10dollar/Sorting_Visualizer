@@ -87,10 +87,10 @@ def quick_sort(bars: list):
 # ___HEAP_SORT___
 
 # ?-in-place
-def heap_sort(bars: list):
+def heap_sort(frame, bars: list, canvas):
     for index in range(len(bars) - 1, 0, -1):
         ut.create_max_heap(bars, index)
         ut.swap(bars, 0, index)
 
-    if bars[0].get_height() > bars[1].get_height():
-        ut.swap(bars, 0, 1)
+        ut.update_bars(frame, bars, canvas)
+

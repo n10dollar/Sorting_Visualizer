@@ -1,45 +1,21 @@
 import tkinter as tk
 import algorithms as al
 import utils as ut
-import random as rd
 
-window = tk.Tk()
-
+frame = tk.Tk()
 width, height = 800, 800
-window.geometry(f"{width}x{height}")
-
-window.title("Sorting Visualizer")
-canvas = tk.Canvas(window, bg="white", height=height, width=width)
-# window.iconbitmap()
+frame.geometry(f"{width}x{height}")
+frame.title("Sorting Visualizer")
+canvas = tk.Canvas(frame, bg="white", height=height, width=width)
 
 x_base = width * .1
 y_base = height * .9
 
-# __________________
-
-# colors = ["red", "green", "blue", "cyan", "magenta", "orange"]
-colors = ["red", "green", "blue"]
 bars = []
+ut.add_randomized_bars(bars, ["red", "green", "blue"], 15, 500, x_base, y_base)
 
-for i in range(20):
-    bars.append(ut.Bar(x_base, y_base,
-                       rd.randrange(0, 500),
-                       colors[rd.randrange(0, len(colors))]
-                       ))
+al.heap_sort(frame, bars, canvas)
+# ut.draw_bars(bars, canvas)
 
-# update()
-
-print(bars)
-# bars = al.quick_sort(bars)
-# al.bubble_sort(bars)
-# print(bars)
-
-al.heap_sort(bars)
-
-for i in range(len(bars)):
-    bars[i].draw(i, canvas)
-
-print(bars)
-
-canvas.pack()
-window.mainloop()
+# canvas.pack()
+# frame.mainloop()
