@@ -89,21 +89,21 @@ def sort_max_heap(bars_heap: list, heap_bottom: int, index=0):
     # if children are greater than current node,
     # swap current node with the biggest child
     # then recur sort_max_heap
-    if not 0 <= index <= heap_bottom:
+    if not (0 <= index <= heap_bottom):
         return
     if left_child(index) > heap_bottom:
         return
     if right_child(index) > heap_bottom:
         if bars_heap[left_child(index)].get_height() > bars_heap[index].get_height():
             swap(bars_heap, index, left_child(index))
-            return
+        return
 
     # now left and right children both exist
     if bars_heap[index].get_height() >= bars_heap[left_child(index)].get_height() and \
             bars_heap[index].get_height() >= bars_heap[right_child(index)].get_height():
         return
 
-    # now current bar is not less than both children
+    # now current bar must be than one child
     if bars_heap[left_child(index)].get_height() > bars_heap[right_child(index)].get_height():
         swap(bars_heap, index, left_child(index))
         sort_max_heap(bars_heap, heap_bottom, left_child(index))
@@ -113,7 +113,7 @@ def sort_max_heap(bars_heap: list, heap_bottom: int, index=0):
 
 
 def create_max_heap(bars: list, heap_bottom: int):
-    for index in range(heap_bottom // 2 - 1, -1, -1):
+    for index in range((heap_bottom + 1) // 2 - 1, -1, -1):
         sort_max_heap(bars, heap_bottom, index)
 
 
