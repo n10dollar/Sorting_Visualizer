@@ -53,12 +53,12 @@ def draw_bars(bars: list, canvas):
 # __________________
 
 
-def update_bars(frame, bars: list, canvas):
+def update_bars(bars: list, frame, canvas):
     canvas.delete("all")
     draw_bars(bars, canvas)
     frame.update_idletasks()
-    frame.update()
-    # time.sleep(.1)
+    # frame.update()
+    time.sleep(1)
 
 
 # __________________

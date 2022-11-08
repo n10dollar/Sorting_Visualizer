@@ -38,7 +38,7 @@ def merge_sort(bars: list):
 # ___BUBBLE_SORT___
 
 # in-place
-def bubble_sort(bars: list, sorted_bars=0):
+def bubble_sort(bars: list, frame, canvas, sorted_bars=0):
     is_sorted = True
 
     for i in range(len(bars) - sorted_bars - 1):
@@ -46,14 +46,15 @@ def bubble_sort(bars: list, sorted_bars=0):
             ut.swap(bars, i, i + 1)
             is_sorted = False
 
+    ut.update_bars(bars, frame, canvas)
     if not is_sorted:
-        bubble_sort(bars, sorted_bars + 1)
+        bubble_sort(bars, frame, canvas, sorted_bars + 1)
 
 
 # ___QUICK_SORT___
 
 # non-in-place
-def quick_sort(bars: list):
+def quick_sort(bars: list, frame, canvas):
     if len(bars) == 1 or len(bars) == 0:
         return bars
     if len(bars) == 2:
@@ -81,7 +82,10 @@ def quick_sort(bars: list):
     bars.remove(pivot)
     bars.insert(i_rightward, pivot)
 
-    return quick_sort(bars[:i_rightward]) + quick_sort(bars[i_rightward:])
+    # ut.update_bars(bars, frame, canvas)
+    bars = quick_sort(bars[:i_rightward], frame, canvas) + quick_sort(bars[i_rightward:], frame, canvas)
+    ut.update_bars(bars, frame, canvas)
+    return bars
 
 
 # ___HEAP_SORT___
@@ -91,6 +95,4 @@ def heap_sort(frame, bars: list, canvas):
     for index in range(len(bars) - 1, 0, -1):
         ut.create_max_heap(bars, index)
         ut.swap(bars, 0, index)
-
-        ut.update_bars(frame, bars, canvas)
 
