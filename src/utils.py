@@ -58,7 +58,7 @@ def update_bars(bars: list, frame, canvas):
     draw_bars(bars, canvas)
     frame.update_idletasks()
     # frame.update()
-    time.sleep(1)
+    time.sleep(.001)
 
 
 # __________________
@@ -69,7 +69,7 @@ def swap(bars: list, index1, index2):
 
 # __________________
 
-def merge(sorted_bars_1: list, sorted_bars_2: list):
+def merge(sorted_bars_1: list, sorted_bars_2: list, frame, canvas, index_offset=0):
     combined = []
     i_bars_1 = 0
     i_bars_2 = 0
@@ -89,6 +89,8 @@ def merge(sorted_bars_1: list, sorted_bars_2: list):
             combined.append(sorted_bars_2[i_bars_2])
             i_bars_1 += 1
             i_bars_2 += 1
+
+        update_bars(combined, frame, canvas)
 
     combined.extend(sorted_bars_1[i_bars_1:])
     combined.extend(sorted_bars_2[i_bars_2:])
@@ -118,7 +120,7 @@ def determine_pivot(bars: list):
 
 # assumes heap is already sorted except for the topmost element
 # index * 2 = left child, index * 2 + 1 = right child
-def sort_max_heap(bars_heap: list, heap_bottom: int, index=0):
+def sort_max_heap(bars_heap: list, heap_bottom: int, frame, canvas, index=0):
     # if children are greater than current node,
     # swap current node with the biggest child
     # then recur sort_max_heap
@@ -131,6 +133,7 @@ def sort_max_heap(bars_heap: list, heap_bottom: int, index=0):
             swap(bars_heap, index, left_child(index))
         return
 
+    update_bars(bars_heap, frame, canvas)
     # now left and right children both exist
     if bars_heap[index].get_height() >= bars_heap[left_child(index)].get_height() and \
             bars_heap[index].get_height() >= bars_heap[right_child(index)].get_height():
@@ -139,15 +142,15 @@ def sort_max_heap(bars_heap: list, heap_bottom: int, index=0):
     # now current bar must be than one child
     if bars_heap[left_child(index)].get_height() > bars_heap[right_child(index)].get_height():
         swap(bars_heap, index, left_child(index))
-        sort_max_heap(bars_heap, heap_bottom, left_child(index))
+        sort_max_heap(bars_heap, heap_bottom, frame, canvas, left_child(index))
     else:
         swap(bars_heap, index, right_child(index))
-        sort_max_heap(bars_heap, heap_bottom, right_child(index))
+        sort_max_heap(bars_heap, heap_bottom, frame, canvas, right_child(index))
 
 
-def create_max_heap(bars: list, heap_bottom: int):
+def create_max_heap(bars: list, heap_bottom: int, frame, canvas):
     for index in range((heap_bottom + 1) // 2 - 1, -1, -1):
-        sort_max_heap(bars, heap_bottom, index)
+        sort_max_heap(bars, heap_bottom, frame, canvas, index)
 
 
 def left_child(index: int):
