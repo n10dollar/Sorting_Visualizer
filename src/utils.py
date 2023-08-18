@@ -40,7 +40,7 @@ def add_bars(bars: list, colors: list, heights: list, x_base, y_base):
 def add_randomized_bars(bars: list, colors: list, count, span, x_base, y_base):
     for i in range(count):
         bars.append(Bar(x_base, y_base,
-                        rd.randrange(0, span),
+                        rd.randrange(1, span),
                         colors[rd.randrange(0, len(colors))]
                         ))
 
